@@ -7,6 +7,8 @@ const Game = use('App/Models/Game')
 class GameController {
   async index ({ response, request }) {
     const games = await Game.query()
+      .with('player')
+      .with('opponent')
       .orderBy('created_at', 'desc')
       .paginate(+request.input('page', 1))
 
