@@ -16,7 +16,8 @@
     "global-require": "off",
     "arrow-parens": ["error", "as-needed"],
     "no-param-reassign": ["error", { "props": false }],
-    "camelcase": "off"
+    "camelcase": "off",
+    "newline-per-chained-call": "off"
   },
   "globals": {
     "use": true
