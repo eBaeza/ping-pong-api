@@ -15,6 +15,10 @@
 
 const Route = use('Route')
 
-Route.get('/', ({ request }) => {
-  return { greeting: 'Hello world in JSON' }
-})
+Route.get('/', () => ({ greeting: 'Hello world in JSON' }))
+
+Route.resource('games', 'GameController').apiOnly()
+  .validator(new Map([
+    [['games.store'], ['StoreGame']],
+    [['games.update'], ['UpdateGame']]
+  ]))

@@ -14,7 +14,7 @@ class GamesSchema extends Schema {
 
       table.integer('player_score').unsigned().defaultTo(0)
       table.integer('opponent_score').unsigned().defaultTo(0)
-      table.string('result', 1) // @values Win: 'w', Lose: 'l', Draw: 'd'
+      table.string('result', 1) // @values Win: 'W', Lose: 'L', Draw: 'D'
       table.timestamps()
     })
   }
