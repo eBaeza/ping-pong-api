@@ -11,9 +11,15 @@
 */
 
 const Factory = use('Factory')
+const User = use('App/Models/User')
 
 class UserSeeder {
   async run () {
+    await User.create({
+      username: 'edgarbaeza',
+      email: 'holamundo@edgarbaeza.mx',
+      password: 'dorilocos'
+    })
     await Factory.model('App/Models/User').createMany(5)
   }
 }

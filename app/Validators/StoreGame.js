@@ -1,6 +1,7 @@
 'use strict'
 
-class StoreGame {
+const BaseValidators = use('App/Validators/BaseValidator')
+class StoreGame extends BaseValidators {
   get rules () {
     return {
       player_id: 'required|integer|exists:users,id',
@@ -8,17 +9,6 @@ class StoreGame {
       player_score: 'required|integer|minNumber:0',
       opponent_score: 'required|integer|minNumber:0'
     }
-  }
-
-  get validateAll () {
-    return true
-  }
-
-  async fails (errorMessages) {
-    return this.ctx.response.status(400).send({
-      status: 'fail',
-      data: errorMessages
-    })
   }
 }
 
