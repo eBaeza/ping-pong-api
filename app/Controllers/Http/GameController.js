@@ -30,6 +30,7 @@ class GameController {
     })
 
     await game.save()
+    await game.loadMany(['player', 'opponent'])
 
     return response.status(CREATED).send({
       status: 'success',

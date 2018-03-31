@@ -48,7 +48,9 @@ test('Create a new game', async ({ client }) => {
       opponent_id: 2,
       player_score: 5,
       opponent_score: 3,
-      result: 'W'
+      result: 'W',
+      player: { id: 1 },
+      opponent: { id: 2 }
     }
   })
 })
