@@ -12,5 +12,8 @@ RUN npm install --production
 COPY .env.production /usr/src/app/.env
 COPY . /usr/src/app
 
+COPY init.sh /usr/src/app/init.sh
+RUN chmod 755 /usr/src/app/init.sh
+
 EXPOSE 3333
-CMD [ "npm", "start" ]
+CMD ["/usr/src/app/init.sh"]
