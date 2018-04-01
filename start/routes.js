@@ -17,8 +17,17 @@ const Route = use('Route')
 
 Route.get('/', () => ({ greeting: 'Hello world in JSON' }))
 
-Route.post('login', 'UserController.login')
+Route.post('login', 'AuthController.login')
   .validator('Login')
+
+Route.resource('users', 'UserController').apiOnly()
+  .middleware(new Map([
+    [['index', 'show', 'update', 'destroy'], ['auth']]
+  ]))
+  .validator(new Map([
+    [['users.store'], ['StoreUser']],
+    [['users.update'], ['UpdateUser']]
+  ]))
 
 Route.resource('games', 'GameController').apiOnly()
   .middleware(['auth'])
