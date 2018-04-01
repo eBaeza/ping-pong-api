@@ -1,0 +1,22 @@
+branch-defaults:
+  master:
+    environment: ping-pong-api
+    group_suffix: null
+environment-defaults:
+  ping-pong-api:
+    branch: null
+    repository: null
+global:
+  application_name: ping-pong-api
+  branch: null
+  default_ec2_keyname: null
+  default_platform: Docker 17.12.0-ce
+  default_region: us-west-2
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli
+  repository: null
+  sc: git
+  workspace_type: Application

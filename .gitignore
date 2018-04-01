@@ -13,3 +13,8 @@ yarn.lock
 
 # The development sqlite file
 database/development.sqlite
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
