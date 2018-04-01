@@ -1,4 +1,4 @@
-# Run Migrations
+#!/bin/bash
+
 node ace migration:run
-# Start app
 npm start
