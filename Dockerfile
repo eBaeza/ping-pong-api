@@ -9,6 +9,7 @@ COPY package.json /usr/src/app/
 RUN npm install --production
 
 # Bundle app source
+COPY .env.production /usr/src/app/.env
 COPY . /usr/src/app
 
 EXPOSE 3333
