@@ -2,12 +2,12 @@
 
 const Model = use('Model')
 
-class Game extends Model {
+class Match extends Model {
   static boot () {
     super.boot()
 
-    this.addHook('beforeCreate', 'GameHook.setResult')
-    this.addHook('beforeSave', 'GameHook.setResult')
+    this.addHook('beforeCreate', 'MatchHook.setResult')
+    this.addHook('beforeSave', 'MatchHook.setResult')
   }
 
   player () {
@@ -19,4 +19,4 @@ class Game extends Model {
   }
 }
 
-module.exports = Game
+module.exports = Match

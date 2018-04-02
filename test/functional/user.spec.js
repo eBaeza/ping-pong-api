@@ -1,7 +1,7 @@
 'use strict'
 
 const { test, trait } = use('Test/Suite')('User routes')
-const Game = use('App/Models/Game')
+const Match = use('App/Models/Match')
 const User = use('App/Models/User')
 
 trait('DatabaseTransactions')
@@ -10,7 +10,7 @@ trait('Test/ApiClient')
 
 test('Get list of user with statics', async ({ client }) => {
   const user = await User.find(1)
-  await Game.createMany([{
+  await Match.createMany([{
     player_id: 1,
     opponent_id: 2,
     player_score: 6,
@@ -36,9 +36,9 @@ test('Get list of user with statics', async ({ client }) => {
       id: 1,
       username: 'edgarbaeza',
       email: 'holamundo@edgarbaeza.mx',
-      total_games: 3,
-      win_games: 2,
-      lose_games: 1
+      total_matches: 3,
+      win_matches: 2,
+      lose_matches: 1
     }]
   })
 })

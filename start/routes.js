@@ -29,9 +29,9 @@ Route.resource('users', 'UserController').apiOnly()
     [['users.update'], ['UpdateUser']]
   ]))
 
-Route.resource('games', 'GameController').apiOnly()
+Route.resource('matches', 'MatchController').apiOnly()
   .middleware(['auth'])
   .validator(new Map([
-    [['games.store'], ['StoreGame']],
-    [['games.update'], ['UpdateGame']]
+    [['matches.store'], ['StoreMatch']],
+    [['matches.update'], ['UpdateMatch']]
   ]))

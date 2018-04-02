@@ -1,30 +1,30 @@
 'use strict'
 
-const { test, trait } = use('Test/Suite')('Game routes')
-const Game = use('App/Models/Game')
+const { test, trait } = use('Test/Suite')('Match routes')
+const Match = use('App/Models/Match')
 const User = use('App/Models/User')
 
 trait('DatabaseTransactions')
 trait('Auth/Client')
 trait('Test/ApiClient')
 
-test('Get list of games', async ({ client }) => {
+test('Get list of matches', async ({ client }) => {
   const user = await User.find(1)
-  const game = await Game.create({
+  const match = await Match.create({
     player_id: 1,
     opponent_id: 2,
     player_score: 6,
     opponent_score: 9
   })
 
-  const response = await client.get('/games')
+  const response = await client.get('/matches')
     .loginVia(user, 'jwt').end()
 
   response.assertStatus(200)
   response.assertJSONSubset({
     status: 'success',
     data: [{
-      id: game.id,
+      id: match.id,
       player_id: 1,
       opponent_id: 2,
       player_score: 6,
@@ -36,9 +36,9 @@ test('Get list of games', async ({ client }) => {
   })
 })
 
-test('Create a new game', async ({ client }) => {
+test('Create a new match', async ({ client }) => {
   const user = await User.find(1)
-  const response = await client.post('/games')
+  const response = await client.post('/matches')
     .loginVia(user, 'jwt').send({
       player_id: 1,
       opponent_id: 2,

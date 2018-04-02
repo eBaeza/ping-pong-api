@@ -1,8 +1,7 @@
 'use strict'
 
 const BaseValidators = use('App/Validators/BaseValidator')
-
-class StoreGame extends BaseValidators {
+class StoreMatch extends BaseValidators {
   get rules () {
     return {
       player_id: 'required|integer|exists:users,id',
@@ -13,4 +12,4 @@ class StoreGame extends BaseValidators {
   }
 }
 
-module.exports = StoreGame
+module.exports = StoreMatch

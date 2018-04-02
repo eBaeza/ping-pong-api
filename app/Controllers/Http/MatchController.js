@@ -2,11 +2,11 @@
 
 const { CREATED, OK } = require('http-status')
 
-const Game = use('App/Models/Game')
+const Match = use('App/Models/Match')
 
-class GameController {
+class MatchController {
   async index ({ response, request }) {
-    const games = await Game.query()
+    const matches = await Match.query()
       .with('player')
       .with('opponent')
       .orderBy('created_at', 'desc')
@@ -14,32 +14,32 @@ class GameController {
 
     return response.status(OK).send({
       status: 'success',
-      ...games.toJSON()
+      ...matches.toJSON()
     })
   }
 
   async store ({ request, response }) {
-    const game = new Game()
+    const match = new Match()
     const { player_id, opponent_id, player_score, opponent_score } = request.post()
 
-    game.fill({
+    match.fill({
       player_id,
       opponent_id,
       player_score,
       opponent_score
     })
 
-    await game.save()
-    await game.loadMany(['player', 'opponent'])
+    await match.save()
+    await match.loadMany(['player', 'opponent'])
 
     return response.status(CREATED).send({
       status: 'success',
-      data: game
+      data: match
     })
   }
 
   async show ({ response, params: { id } }) {
-    const game = await Game.query()
+    const match = await Match.query()
       .where('id', id)
       .with('player')
       .with('opponent')
@@ -47,33 +47,33 @@ class GameController {
 
     return response.status(OK).send({
       status: 'success',
-      data: game
+      data: match
     })
   }
 
   async update ({ request, response, params: { id } }) {
-    const game = await Game.findOrFail(id)
+    const match = await Match.findOrFail(id)
     const { player_id, opponent_id, player_score, opponent_score } = request.post()
 
-    game.merge({
+    match.merge({
       player_id,
       opponent_id,
       player_score,
       opponent_score
     })
 
-    await game.save()
-    await game.loadMany(['player', 'opponent'])
+    await match.save()
+    await match.loadMany(['player', 'opponent'])
 
     return response.status(OK).send({
       status: 'success',
-      data: game
+      data: match
     })
   }
 
   async destroy ({ response, params: { id } }) {
-    const game = await Game.findOrFail(id)
-    await game.delete()
+    const match = await Match.findOrFail(id)
+    await match.delete()
 
     return response.status(OK).send({
       status: 'success',
@@ -82,4 +82,4 @@ class GameController {
   }
 }
 
-module.exports = GameController
+module.exports = MatchController

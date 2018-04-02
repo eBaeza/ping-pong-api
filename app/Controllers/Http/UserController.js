@@ -7,7 +7,7 @@ const User = use('App/Models/User')
 class UserController {
   async index ({ request, response }) {
     const users = await User.query()
-      .withGameStatistics()
+      .withMatchStatistics()
       .paginate(+request.input('page', 1))
 
     return response.status(OK).send({
@@ -28,7 +28,7 @@ class UserController {
   async show ({ response, params: { id } }) {
     const user = await User.findOrFail(id)
 
-    await user.loadMany(['localGames.opponent', 'visitorGames.player'])
+    await user.loadMany(['localMatchs.opponent', 'visitorMatchs.player'])
 
     return response.send({
       status: 'success',

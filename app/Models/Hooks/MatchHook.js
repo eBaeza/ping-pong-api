@@ -1,8 +1,8 @@
 'use strict'
 
-const GameHook = {}
+const MatchHook = {}
 
-GameHook.setResult = async modelInstance => {
+MatchHook.setResult = async modelInstance => {
   if (modelInstance.player_score > modelInstance.opponent_score) {
     modelInstance.result = 'W'
   } else if (modelInstance.player_score < modelInstance.opponent_score) {
@@ -12,4 +12,4 @@ GameHook.setResult = async modelInstance => {
   }
 }
 
-module.exports = GameHook
+module.exports = MatchHook

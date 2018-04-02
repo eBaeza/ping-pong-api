@@ -35,37 +35,37 @@ class User extends Model {
     return this.hasMany('App/Models/Token')
   }
 
-  static scopeWithGameStatistics (builder) {
+  static scopeWithMatchStatistics (builder) {
     return builder
       .select('users.*')
       .select(DB.raw(`
-        Count (games.id)::integer AS total_games,
-        Count (games.id) FILTER (
-          WHERE (games.result = 'W' and games.player_id = users.id)
-          OR (games.result = 'L' and games.opponent_id = users.id)
-        )::integer AS win_games,
-        Count (games.id) FILTER (
-          WHERE (games.result = 'L' and games.player_id = users.id)
-          OR (games.result = 'W' and games.opponent_id = users.id)
-        )::integer AS lose_games
+        Count (matches.id)::integer AS total_matches,
+        Count (matches.id) FILTER (
+          WHERE (matches.result = 'W' and matches.player_id = users.id)
+          OR (matches.result = 'L' and matches.opponent_id = users.id)
+        )::integer AS win_matches,
+        Count (matches.id) FILTER (
+          WHERE (matches.result = 'L' and matches.player_id = users.id)
+          OR (matches.result = 'W' and matches.opponent_id = users.id)
+        )::integer AS lose_matches
       `))
-      .leftJoin('games', query => {
+      .leftJoin('matches', query => {
         query
-          .on('users.id', 'games.player_id')
-          .orOn('users.id', 'games.opponent_id')
+          .on('users.id', 'matches.player_id')
+          .orOn('users.id', 'matches.opponent_id')
       })
       .groupBy('users.id')
-      .orderBy('total_games', 'desc')
-      .orderBy('win_games', 'desc')
-      .orderBy('lose_games', 'asc')
+      .orderBy('total_matches', 'desc')
+      .orderBy('win_matches', 'desc')
+      .orderBy('lose_matches', 'asc')
   }
 
-  localGames () {
-    return this.hasMany('App/Models/Game', 'id', 'player_id')
+  localMatchs () {
+    return this.hasMany('App/Models/Match', 'id', 'player_id')
   }
 
-  visitorGames () {
-    return this.hasMany('App/Models/Game', 'id', 'opponent_id')
+  visitorMatchs () {
+    return this.hasMany('App/Models/Match', 'id', 'opponent_id')
   }
 }
 
