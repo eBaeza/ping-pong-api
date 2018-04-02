@@ -56,7 +56,7 @@ class User extends Model {
             OR (matches.result = 'L' AND matches.opponent_id = users.id)
           )::numeric * 100 / Count(matches.id)::numeric
           ELSE 0
-        END, 2) AS percentage_won_matches
+        END, 2)::float AS percentage_won_matches
       `))
       .leftJoin('matches', query => {
         query
@@ -64,8 +64,8 @@ class User extends Model {
           .orOn('users.id', 'matches.opponent_id')
       })
       .groupBy('users.id')
-      .orderBy('total_matches', 'desc')
       .orderBy('percentage_won_matches', 'desc')
+      .orderBy('total_matches', 'desc')
   }
 
   localMatchs () {
