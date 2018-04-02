@@ -32,14 +32,14 @@ test('Get list of user with statics', async ({ client }) => {
   response.assertStatus(200)
   response.assertJSONSubset({
     status: 'success',
-    data: [{
+    data: [{}, {
       id: 1,
       username: 'edgarbaeza',
       email: 'holamundo@edgarbaeza.mx',
       total_matches: 3,
       won_matches: 2,
       lost_matches: 1,
-      percentage_won_matches: ((2 * 100) / 3).toFixed(2)
+      percentage_won_matches: parseFloat(((2 * 100) / 3).toFixed(2))
     }]
   })
 })
