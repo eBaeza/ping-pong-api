@@ -41,13 +41,22 @@ class User extends Model {
       .select(DB.raw(`
         Count (matches.id)::integer AS total_matches,
         Count (matches.id) FILTER (
-          WHERE (matches.result = 'W' and matches.player_id = users.id)
-          OR (matches.result = 'L' and matches.opponent_id = users.id)
-        )::integer AS win_matches,
+          WHERE (matches.result = 'W' AND matches.player_id = users.id)
+          OR (matches.result = 'L' AND matches.opponent_id = users.id)
+        )::integer AS won_matches,
+
         Count (matches.id) FILTER (
-          WHERE (matches.result = 'L' and matches.player_id = users.id)
-          OR (matches.result = 'W' and matches.opponent_id = users.id)
-        )::integer AS lose_matches
+          WHERE (matches.result = 'L' AND matches.player_id = users.id)
+          OR (matches.result = 'W' AND matches.opponent_id = users.id)
+        )::integer AS lost_matches,
+
+        Round(CASE WHEN Count(matches.id)::integer > 0 THEN
+          Count (matches.id) FILTER (
+            WHERE (matches.result = 'W' AND matches.player_id = users.id)
+            OR (matches.result = 'L' AND matches.opponent_id = users.id)
+          )::numeric * 100 / Count(matches.id)::numeric
+          ELSE 0
+        END, 2) AS percentage_won_matches
       `))
       .leftJoin('matches', query => {
         query
@@ -56,8 +65,7 @@ class User extends Model {
       })
       .groupBy('users.id')
       .orderBy('total_matches', 'desc')
-      .orderBy('win_matches', 'desc')
-      .orderBy('lose_matches', 'asc')
+      .orderBy('percentage_won_matches', 'desc')
   }
 
   localMatchs () {

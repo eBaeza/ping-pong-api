@@ -37,8 +37,9 @@ test('Get list of user with statics', async ({ client }) => {
       username: 'edgarbaeza',
       email: 'holamundo@edgarbaeza.mx',
       total_matches: 3,
-      win_matches: 2,
-      lose_matches: 1
+      won_matches: 2,
+      lost_matches: 1,
+      percentage_won_matches: ((2 * 100) / 3).toFixed(2)
     }]
   })
 })
