@@ -20,6 +20,7 @@ Route.get('/', () => ({ greeting: 'Hello world in JSON' }))
 Route.post('login', 'AuthController.login')
   .validator('Login')
 
+Route.get('users/search', 'UserController.search').middleware('auth')
 Route.resource('users', 'UserController').apiOnly()
   .middleware(new Map([
     [['index', 'show', 'update', 'destroy'], ['auth']]
@@ -28,6 +29,7 @@ Route.resource('users', 'UserController').apiOnly()
     [['users.store'], ['StoreUser']],
     [['users.update'], ['UpdateUser']]
   ]))
+
 
 Route.resource('matches', 'MatchController').apiOnly()
   .middleware(['auth'])

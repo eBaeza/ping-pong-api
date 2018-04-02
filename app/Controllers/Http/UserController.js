@@ -16,6 +16,19 @@ class UserController {
     })
   }
 
+  async search ({ request, response }) {
+    const query = request.input('query', '')
+    const users = await User.query()
+      .where('username', 'like', `%${query}%`)
+      .orWhere('email', 'like', `%${query}%`)
+      .fetch()
+
+    return response.send({
+      status: 'success',
+      data: users
+    })
+  }
+
   async store ({ request, response }) {
     const user = await User.create(request.all())
 
