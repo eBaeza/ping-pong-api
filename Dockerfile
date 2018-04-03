@@ -1,19 +1,18 @@
 FROM node:carbon
 
 # Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN mkdir -p /app
+WORKDIR /app
 
 # Install app dependencies
-COPY package.json /usr/src/app/
+COPY package.json /app/
 RUN npm install --production
 
 # Bundle app source
-COPY .env.production /usr/src/app/.env
-COPY . /usr/src/app
+COPY . /app
 
-COPY init.sh /usr/src/app/init.sh
-RUN chmod 755 /usr/src/app/init.sh
+COPY init.sh /app/init.sh
+RUN chmod 755 /app/init.sh
 
 EXPOSE 3333
-CMD ["/usr/src/app/init.sh"]
+CMD ["/app/init.sh"]
