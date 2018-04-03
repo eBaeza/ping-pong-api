@@ -30,3 +30,6 @@ adonis seed
 ```js
 adonis serve --dev
 ```
+
+### Docs
+- [REST API Documentation](ttps://web.postman.co/collections/592641-aaa46879-9fe7-466e-a624-17315957829e/publish?workspace=17fd94cc-e976-4621-8914-cf0cf7d4117d)
