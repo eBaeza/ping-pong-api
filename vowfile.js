@@ -35,7 +35,7 @@ module.exports = (cli, runner) => {
     |
     */
     await ace.call('migration:run')
-    await ace.call('seed')
+    await ace.call('seed', {}, { files: '1UserSeeder.js' })
   })
 
   runner.after(async () => {
