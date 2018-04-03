@@ -20,7 +20,7 @@ class UserSeeder {
       email: 'holamundo@edgarbaeza.mx',
       password: 'dorilocos'
     })
-    await Factory.model('App/Models/User').createMany(5)
+    await Factory.model('App/Models/User').createMany(30)
   }
 }
 
